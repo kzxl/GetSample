@@ -28,32 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
+            btLoadImg = new Button();
+            picBox = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)picBox).BeginInit();
             SuspendLayout();
             // 
-            // button1
+            // btLoadImg
             // 
-            button1.Location = new Point(296, 113);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btLoadImg.Location = new Point(693, 12);
+            btLoadImg.Name = "btLoadImg";
+            btLoadImg.Size = new Size(95, 23);
+            btLoadImg.TabIndex = 0;
+            btLoadImg.Text = "Load Image";
+            btLoadImg.UseVisualStyleBackColor = true;
+            btLoadImg.Click += button1_Click;
+            // 
+            // picBox
+            // 
+            picBox.Dock = DockStyle.Left;
+            picBox.Location = new Point(0, 0);
+            picBox.Name = "picBox";
+            picBox.Size = new Size(362, 450);
+            picBox.TabIndex = 1;
+            picBox.TabStop = false;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(button1);
+            Controls.Add(picBox);
+            Controls.Add(btLoadImg);
             Name = "Form1";
             Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)picBox).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Button button1;
+        private Button btLoadImg;
+        private PictureBox picBox;
     }
 }
