@@ -48,7 +48,7 @@
             picBox.Dock = DockStyle.Left;
             picBox.Location = new Point(0, 0);
             picBox.Name = "picBox";
-            picBox.Size = new Size(362, 450);
+            picBox.Size = new Size(687, 450);
             picBox.TabIndex = 1;
             picBox.TabStop = false;
             // 

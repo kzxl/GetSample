@@ -22,8 +22,10 @@ namespace GetSample
                 if (Openfile.ShowDialog() == DialogResult.OK)
                 {
                     Image<Bgr, Byte> My_Image = new Image<Bgr, byte>(Openfile.FileName);
+                    
                     DetectText(My_Image);
-                    picBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                    //picBox.Image = grayImage.ToBitmap();
+                    //picBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
             }
             catch(Exception ex) { MessageBox.Show(ex.Message); }
@@ -32,9 +34,10 @@ namespace GetSample
         }
         private void DetectText(Image<Bgr, Byte> image)
         {
-            var grayImage = image.Convert<Gray, Byte>();
-           
+            var grayImage = image.Convert<Gray, Byte>();            
+            //CvInvoke.CvtColor(image, grayImage, ColorConversion.Bgr2Gray);
             var sobelImage = grayImage.Sobel(1, 0, 3);
+
             var thresholdImage = sobelImage.ThresholdBinaryInv(new Gray(0), new Gray(255));
             
 
