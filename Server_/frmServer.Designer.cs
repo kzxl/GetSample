@@ -179,6 +179,7 @@
             Controls.Add(lstUser);
             Name = "frmServer";
             Text = "Server";
+            Load += frmServer_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
