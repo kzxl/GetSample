@@ -38,8 +38,8 @@
             groupBox4 = new GroupBox();
             label4 = new Label();
             statusStrip1 = new StatusStrip();
-            toolStripStatusLabel1 = new ToolStripStatusLabel();
-            toolStripStatusLabel2 = new ToolStripStatusLabel();
+            lbComputerName = new ToolStripStatusLabel();
+            lbIP = new ToolStripStatusLabel();
             btChecked = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -136,24 +136,24 @@
             // 
             // statusStrip1
             // 
-            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, toolStripStatusLabel2 });
+            statusStrip1.Items.AddRange(new ToolStripItem[] { lbComputerName, lbIP });
             statusStrip1.Location = new Point(216, 493);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(769, 22);
             statusStrip1.TabIndex = 3;
             statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // lbComputerName
             // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new Size(99, 17);
-            toolStripStatusLabel1.Text = "Computer Name:";
+            lbComputerName.Name = "lbComputerName";
+            lbComputerName.Size = new Size(99, 17);
+            lbComputerName.Text = "Computer Name:";
             // 
-            // toolStripStatusLabel2
+            // lbIP
             // 
-            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new Size(77, 17);
-            toolStripStatusLabel2.Text = "Computer IP:";
+            lbIP.Name = "lbIP";
+            lbIP.Size = new Size(77, 17);
+            lbIP.Text = "Computer IP:";
             // 
             // btChecked
             // 
@@ -206,8 +206,8 @@
         private GroupBox groupBox4;
         private Label label4;
         private StatusStrip statusStrip1;
-        private ToolStripStatusLabel toolStripStatusLabel1;
-        private ToolStripStatusLabel toolStripStatusLabel2;
+        private ToolStripStatusLabel lbComputerName;
+        private ToolStripStatusLabel lbIP;
         private Button btChecked;
     }
 }
