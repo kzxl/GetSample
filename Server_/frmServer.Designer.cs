@@ -177,7 +177,9 @@
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(lstUser);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "frmServer";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Server";
             Load += frmServer_Load;
             groupBox1.ResumeLayout(false);

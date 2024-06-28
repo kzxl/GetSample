@@ -22,6 +22,8 @@ namespace Server_
             else { lbIP.Text += ""; }
 
             lbComputerName.Text +=" "+ clsFunctions.GetComputerName();
+
+            clsFunctions.StartServer();
         }
     }
 }

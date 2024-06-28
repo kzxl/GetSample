@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -197,8 +200,145 @@ namespace EasyFunctions
             }
             catch (Exception) { return null; }
         }
-        
-        
+
+        #region cụm TCPCliet chat gửi thông báo
+        //Tao file IP login cho tung user
+        public static void CreateFileIP(string User, string ip)
+        {
+            try
+            {
+                string pathfile = AppDomain.CurrentDomain.BaseDirectory + "\\ListClientIP\\";
+                Directory.CreateDirectory(pathfile);
+                File.WriteAllText(pathfile + User + ".txt", ip);
+            }
+            catch (Exception) { throw; }
+        }
+
+        //Sent mess to all ip
+        public static void SentMesstoAll(string mess, List<string> lstIP)
+        {
+
+            foreach (string ip in lstIP)
+            {
+                //try
+                //{
+                TcpClient client = new TcpClient();
+                IPEndPoint IpEnd = new IPEndPoint(IPAddress.Parse(ip), 5000);
+                client.Connect(IpEnd.Address, IpEnd.Port);
+                if (client.Connected)
+                {
+                    StreamWriter STW = new StreamWriter(client.GetStream());
+                    STW.AutoFlush = true;
+                    try
+                    {
+                        STW.WriteLine(mess);
+                        mess = "";
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                    STW.Close();
+
+
+                }
+                client.Close();
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show(ex.Message.ToString());
+                //}
+            }
+        }
+        //Send mess
+        public static void SentMess(string mess, string ip, int port)
+        {
+            TcpClient client = new TcpClient();
+
+            try
+            {
+                IPEndPoint IpEnd = new IPEndPoint(IPAddress.Parse(ip), port);
+                client.Connect(IpEnd);
+                if (client.Connected)
+                {
+                    //clsFunctions.MSG_Error("Connect sục séc");
+                    StreamWriter STW = new StreamWriter(client.GetStream());
+                    STW.AutoFlush = true;
+                    try
+                    {
+                        STW.WriteLine(mess);
+                        mess = "";
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                    STW.Close();
+
+                }
+                client.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        //
+        #endregion
+
+        #region cụm server
+        //Server nhận thông tin
+        private static bool active = true;
+        private static IPEndPoint iep;
+        private static TcpListener listener;
+        private static List<TcpClient> lstClient = new List<TcpClient>();
+        static Thread ServerThread;
+        public static void StartServer()
+        {
+            try
+            {
+                iep = new IPEndPoint(IPAddress.Any, 5000);
+                listener = new TcpListener(iep);
+                listener.Start();
+                while (true)
+                {
+                    TcpClient receiver = listener.AcceptTcpClient();
+                    if (receiver.Connected)
+                    {
+                        lstClient.Add(receiver);
+                        ServerThread = new Thread(() => Listeners(receiver));
+                        ServerThread.IsBackground = true;
+                        ServerThread.Start();
+                    }
+
+                }
+
+            }
+            catch { }
+        }
+        static string mess ="";
+        public static void Listeners(TcpClient client)
+        {
+            try
+            {
+                StreamReader reader = new StreamReader(client.GetStream());
+                while (active)
+                {
+                   mess=reader.ReadLine();
+                    //reader.ReadLine();
+                    ServerThread.Abort();
+                }
+
+                reader.Close();
+
+            }
+            catch//(Exception e)
+            {
+                //MessageBox.Show(e.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
     }
 
     #region Convert Data
