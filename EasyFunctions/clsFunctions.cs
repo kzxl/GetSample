@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO.Ports;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
@@ -8,6 +9,9 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
+using System.Xml;
+using Microsoft.Data.Sqlite;
 
 namespace EasyFunctions
 {
@@ -263,17 +267,18 @@ namespace EasyFunctions
                 {
                     //clsFunctions.MSG_Error("Connect sục séc");
                     StreamWriter STW = new StreamWriter(client.GetStream());
+                    StreamReader SReader = new StreamReader(client.GetStream());
                     STW.AutoFlush = true;
                     try
                     {
                         STW.WriteLine(mess);
-                        mess = "";
                     }
                     catch (Exception)
                     {
                         throw;
                     }
                     STW.Close();
+                    SReader.Close();
 
                 }
                 client.Close();
@@ -285,6 +290,73 @@ namespace EasyFunctions
 
         }
         //
+        #endregion
+
+        #region SQLite
+
+        public static SqliteConnection CreateConnection()
+        {
+
+            SqliteConnection sqlite_conn;
+            // Create a new database connection:
+            sqlite_conn = new SqliteConnection(@"Data Source = mydb.db;");
+            // Open the connection:
+            try
+            {
+                sqlite_conn.Open();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return sqlite_conn;
+        }
+        public static void InsertData(SqliteConnection conn, string Line, string CF, string CODE, string Quantity)
+        {
+            SqliteCommand sqlite_cmd;
+            sqlite_cmd = conn.CreateCommand();
+            sqlite_cmd.CommandText = @"INSERT INTO LineInfo
+               (LINE, CF, CODE, Quantity) VALUES('" + Line + "','" + CF + "','" + CODE + "'," + Quantity + "); ";
+            sqlite_cmd.ExecuteNonQuery();
+        }
+
+        public static DataTable ExecuteReadQuery(string query, SqliteConnection connection)
+        {
+            DataTable entries = new DataTable();
+
+            using (SqliteConnection db = new SqliteConnection(connection.ConnectionString))
+            {
+                SqliteCommand selectCommand = new SqliteCommand(query, db);
+                try
+                {
+                    db.Open();
+                    SqliteDataReader reader = selectCommand.ExecuteReader();
+
+                    if (reader.HasRows)
+                        for (int i = 0; i < reader.FieldCount; i++)
+                            entries.Columns.Add(new DataColumn(reader.GetName(i)));
+
+                    int j = 0;
+                    while (reader.Read())
+                    {
+                        DataRow row = entries.NewRow();
+                        entries.Rows.Add(row);
+
+                        for (int i = 0; i < reader.FieldCount; i++)
+                            entries.Rows[j][i] = (reader.GetValue(i));
+
+                        j++;
+                    }
+
+                    db.Close();
+                }
+                catch (SqliteException e)
+                {                    
+                    db.Close();
+                }
+                return entries;
+            }
+        }
         #endregion
 
         #region cụm server
@@ -317,7 +389,7 @@ namespace EasyFunctions
             }
             catch { }
         }
-        static string mess ="";
+        static string mess = "";
         public static void Listeners(TcpClient client)
         {
             try
@@ -325,7 +397,7 @@ namespace EasyFunctions
                 StreamReader reader = new StreamReader(client.GetStream());
                 while (active)
                 {
-                   mess=reader.ReadLine();
+                    mess = reader.ReadLine();
                     //reader.ReadLine();
                     ServerThread.Abort();
                 }
@@ -337,6 +409,23 @@ namespace EasyFunctions
             {
                 //MessageBox.Show(e.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        public static string GetData()
+        {
+            return mess;
+        }
+        #endregion
+        #region COM
+        public static bool checkCOMExits(string PortName)
+        {
+            try
+            {
+                if (SerialPort.GetPortNames().Any(x => x == PortName))
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception) { return false; }
         }
         #endregion
     }
@@ -498,3 +587,4 @@ namespace EasyFunctions
     }
     #endregion
 }
+
