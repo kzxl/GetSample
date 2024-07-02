@@ -20,7 +20,8 @@ namespace Server_
         private Thread th_StartListen;
         private Thread th_handleClient;
         SqliteConnection sqlite_conn;
-
+        DataTable dt;
+        int idLine;
         public frmServer()
         {
             InitializeComponent();
@@ -29,6 +30,7 @@ namespace Server_
         {
             sqlite_conn = clsFunctions.CreateConnection();
             refreshData();
+            Clear();
             if (clsFunctions.GetIPv4() != null)
             {
                 foreach (string temp in clsFunctions.GetIPv4())
@@ -39,7 +41,6 @@ namespace Server_
             else { lbIP.Text += ""; }
 
             lbComputerName.Text += " " + clsFunctions.GetComputerName();
-            lstUser.Items.Clear();
 
 
             th_StartListen = new Thread(new ThreadStart(StartListen));
@@ -123,6 +124,9 @@ namespace Server_
                             lbCode.Text = strdata.Split('/')[3];
                             lbQuantity.Text = strdata.Split('/')[4];
                             clsFunctions.InsertData(sqlite_conn, strdata.Split('/')[1], strdata.Split('/')[2], strdata.Split('/')[3], strdata.Split('/')[4]);
+                            timer1.Enabled = true;
+                            Thread.Sleep(1000);
+                            timer1.Enabled = false;
 
                         }
                         if (strdata.StartsWith("END"))
@@ -131,6 +135,7 @@ namespace Server_
                         }
                     }
                 }
+
             }
             catch (Exception)
             {
@@ -140,13 +145,57 @@ namespace Server_
         }
         void refreshData()
         {
-            DataTable dt = clsFunctions.ExecuteReadQuery("Select * from LineInfo", sqlite_conn);
+            dt = clsFunctions.ExecuteReadQuery("Select * from LineInfo order by DATE DESC", sqlite_conn);
+            dgv.AutoGenerateColumns = false;
+            dgv.DataSource = dt;
+        }
+        void getDataByID(int id)
+        {
+            try
+            {
+
+            }
+            catch { }
         }
         private void frmServer_FormClosed(object sender, FormClosedEventArgs e)
         {
             Environment.Exit(Environment.ExitCode);
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            refreshData();
+        }
+
+        private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                idLine = dgv.Rows[e.RowIndex].Cells["Id"].Value._Int();
+                lbLine.Text = dgv.Rows[e.RowIndex].Cells["LINE"].Value.ToString();
+                lbCF.Text = dgv.Rows[e.RowIndex].Cells["CF"].Value.ToString();
+                lbCode.Text = dgv.Rows[e.RowIndex].Cells["CODE"].Value.ToString();
+                lbQuantity.Text = dgv.Rows[e.RowIndex].Cells["Quantity"].Value.ToString();
+            }
+            catch { }
+        }
+        void Clear()
+        {
+            lbLine.Text = "";
+            lbCF.Text = "";
+            lbCode.Text = "";
+            lbQuantity.Text = "";
+        }
+        private void btChecked_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                clsFunctions.DeleteData(sqlite_conn, idLine);
+                refreshData();
+                Clear();
+            }
+            catch { }
+        }
     }
     public class LineInfo
     {

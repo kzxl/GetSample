@@ -316,10 +316,16 @@ namespace EasyFunctions
             SqliteCommand sqlite_cmd;
             sqlite_cmd = conn.CreateCommand();
             sqlite_cmd.CommandText = @"INSERT INTO LineInfo
-               (LINE, CF, CODE, Quantity) VALUES('" + Line + "','" + CF + "','" + CODE + "'," + Quantity + "); ";
+               (LINE, CF, CODE, Quantity, DATE) VALUES('" + Line + "','" + CF + "','" + CODE + "'," + Quantity + ",'" + DateTime.Now + "'); ";
             sqlite_cmd.ExecuteNonQuery();
         }
-
+        public static void DeleteData(SqliteConnection conn, int id)
+        {
+            SqliteCommand sqlite_cmd;
+            sqlite_cmd = conn.CreateCommand();
+            sqlite_cmd.CommandText = @"DELETE FROM LineInfo WHERE Id=" + id;
+            sqlite_cmd.ExecuteNonQuery();
+        }
         public static DataTable ExecuteReadQuery(string query, SqliteConnection connection)
         {
             DataTable entries = new DataTable();
@@ -351,7 +357,7 @@ namespace EasyFunctions
                     db.Close();
                 }
                 catch (SqliteException e)
-                {                    
+                {
                     db.Close();
                 }
                 return entries;

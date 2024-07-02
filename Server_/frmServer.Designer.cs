@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lstUser = new ListView();
+            components = new System.ComponentModel.Container();
             lbLine = new Label();
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
@@ -44,23 +44,21 @@
             btChecked = new Button();
             groupBox5 = new GroupBox();
             lbQuantity = new Label();
+            dgv = new DataGridView();
+            Line = new DataGridViewTextBoxColumn();
+            Code = new DataGridViewTextBoxColumn();
+            CF = new DataGridViewTextBoxColumn();
+            Quantity = new DataGridViewTextBoxColumn();
+            id = new DataGridViewTextBoxColumn();
+            timer1 = new System.Windows.Forms.Timer(components);
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             groupBox4.SuspendLayout();
             statusStrip1.SuspendLayout();
             groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
             SuspendLayout();
-            // 
-            // lstUser
-            // 
-            lstUser.Dock = DockStyle.Left;
-            lstUser.Location = new Point(0, 0);
-            lstUser.Name = "lstUser";
-            lstUser.Size = new Size(216, 515);
-            lstUser.TabIndex = 0;
-            lstUser.UseCompatibleStateImageBehavior = false;
-            lstUser.View = View.List;
             // 
             // lbLine
             // 
@@ -142,9 +140,9 @@
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new ToolStripItem[] { lbComputerName, lbIP, lbStatus });
-            statusStrip1.Location = new Point(216, 493);
+            statusStrip1.Location = new Point(0, 493);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(769, 22);
+            statusStrip1.Size = new Size(985, 22);
             statusStrip1.TabIndex = 3;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -175,6 +173,7 @@
             btChecked.TabIndex = 4;
             btChecked.Text = "Confirm";
             btChecked.UseVisualStyleBackColor = true;
+            btChecked.Click += btChecked_Click;
             // 
             // groupBox5
             // 
@@ -195,11 +194,76 @@
             lbQuantity.TabIndex = 1;
             lbQuantity.Text = "...";
             // 
+            // dgv
+            // 
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.AllowUserToResizeColumns = false;
+            dgv.AllowUserToResizeRows = false;
+            dgv.BackgroundColor = SystemColors.ControlLightLight;
+            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv.Columns.AddRange(new DataGridViewColumn[] { Line, Code, CF, Quantity, id });
+            dgv.Dock = DockStyle.Left;
+            dgv.Location = new Point(0, 0);
+            dgv.Name = "dgv";
+            dgv.ReadOnly = true;
+            dgv.RowTemplate.Height = 25;
+            dgv.ShowEditingIcon = false;
+            dgv.Size = new Size(216, 493);
+            dgv.TabIndex = 5;
+            dgv.CellClick += dgv_CellClick;
+            // 
+            // Line
+            // 
+            Line.DataPropertyName = "LINE";
+            Line.HeaderText = "LINE";
+            Line.Name = "Line";
+            Line.ReadOnly = true;
+            Line.Width = 170;
+            // 
+            // Code
+            // 
+            Code.DataPropertyName = "CODE";
+            Code.HeaderText = "Code";
+            Code.Name = "Code";
+            Code.ReadOnly = true;
+            Code.Visible = false;
+            // 
+            // CF
+            // 
+            CF.DataPropertyName = "CF";
+            CF.HeaderText = "CF";
+            CF.Name = "CF";
+            CF.ReadOnly = true;
+            CF.Visible = false;
+            // 
+            // Quantity
+            // 
+            Quantity.DataPropertyName = "Quantity";
+            Quantity.HeaderText = "Quantity";
+            Quantity.Name = "Quantity";
+            Quantity.ReadOnly = true;
+            Quantity.Visible = false;
+            // 
+            // id
+            // 
+            id.DataPropertyName = "Id";
+            id.HeaderText = "Id";
+            id.Name = "id";
+            id.ReadOnly = true;
+            id.Visible = false;
+            // 
+            // timer1
+            // 
+            timer1.Interval = 1000;
+            timer1.Tick += timer1_Tick;
+            // 
             // frmServer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(985, 515);
+            Controls.Add(dgv);
             Controls.Add(btChecked);
             Controls.Add(statusStrip1);
             Controls.Add(groupBox4);
@@ -207,7 +271,6 @@
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
-            Controls.Add(lstUser);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "frmServer";
             StartPosition = FormStartPosition.CenterScreen;
@@ -226,13 +289,12 @@
             statusStrip1.PerformLayout();
             groupBox5.ResumeLayout(false);
             groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgv).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private ListView lstUser;
         private Label lbLine;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
@@ -248,5 +310,12 @@
         private ToolStripStatusLabel lbStatus;
         private GroupBox groupBox5;
         private Label lbQuantity;
+        private DataGridView dgv;
+        private System.Windows.Forms.Timer timer1;
+        private DataGridViewTextBoxColumn Line;
+        private DataGridViewTextBoxColumn Code;
+        private DataGridViewTextBoxColumn CF;
+        private DataGridViewTextBoxColumn Quantity;
+        private DataGridViewTextBoxColumn id;
     }
 }
