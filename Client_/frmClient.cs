@@ -40,6 +40,7 @@ namespace Client_
                     frmClientDetail frmClientDetail = new frmClientDetail(txtCF.Text, txtCODE.Text, txtQuatity.Text, Folder);
                     this.Hide();
                     frmClientDetail.Closed += (s, args) => this.Close();
+                    serPort.Close();
                     //frmClientDetail.Show();
                     frmClientDetail.ShowDialog();
 

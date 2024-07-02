@@ -42,8 +42,14 @@ namespace Server_
 
                 LogPath = dsXML.Tables["GeneralInfo"].Rows[0]["LogPath"].ToString();
             }
+            if (File.Exists("mydb.db"))
+                sqlite_conn = clsFunctions.CreateConnection();
+            else
+            {
+                sqlite_conn = clsFunctions.CreateConnection();
+                clsFunctions.CreateTable(sqlite_conn);
+            }
 
-            sqlite_conn = clsFunctions.CreateConnection();
             refreshData();
             Clear();
             if (!File.Exists("SSettings.xml"))
@@ -212,7 +218,7 @@ namespace Server_
                     lbLocation.Text = "Vị trí cũ: " + Location1 + " Vị trí mới: " + Location2;
                 }
 
-                
+
             }
             catch { }
         }

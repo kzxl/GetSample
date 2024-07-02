@@ -300,16 +300,32 @@ namespace EasyFunctions
             SqliteConnection sqlite_conn;
             // Create a new database connection:
             sqlite_conn = new SqliteConnection(@"Data Source = mydb.db;");
+
             // Open the connection:
             try
             {
-                sqlite_conn.Open();
+                sqlite_conn.Open();                
             }
             catch (Exception ex)
             {
 
             }
             return sqlite_conn;
+        }
+        public static void CreateTable(SqliteConnection conn)
+        {
+            SqliteCommand cmd;
+            cmd= conn.CreateCommand();
+            string sql = @"CREATE TABLE LineInfo (
+                                Id       INTEGER PRIMARY KEY AUTOINCREMENT,
+                                LINE     TEXT,
+                                CF       TEXT,
+                                CODE     TEXT,
+                                Quantity INTEGER,
+                                DATE     TEXT
+                            );";
+            cmd.CommandText = sql;
+            cmd.ExecuteNonQuery();
         }
         public static void InsertData(SqliteConnection conn, string Line, string CF, string CODE, string Quantity)
         {
