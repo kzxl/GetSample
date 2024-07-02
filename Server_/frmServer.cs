@@ -310,7 +310,7 @@ namespace Server_
                     ws.Cell("D2").Value = Quantity;
                     ws.Cell("E2").Value = Location1;
                     ws.Cell("F2").Value = Location2;
-                    ws.Cell("G2").Value = Confirm;
+                    ws.Cell("G2").Value = Confirm.ToString("dd/MM/yyyy hh:mm:ss tt");
                     workbookLogs.SaveAs(LogPath + @"\SLogs.xlsx");
                 }
             }

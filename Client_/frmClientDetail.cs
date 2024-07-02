@@ -28,9 +28,9 @@ namespace Client_
         {
             bool bSave = true;
 
-            if (txtFullname.Text == "")
+            if (txtUsername.Text == "")
             {
-                dxErr.SetError(txtFullname, "Not Empty");
+                dxErr.SetError(txtUsername, "Not Empty");
                 bSave = false;
             }
 
@@ -58,7 +58,7 @@ namespace Client_
                     //UserName
                     ws.Cell("G" + i).Value = txtUsername.Text;
                     //Time
-                    ws.Cell("H" + i).Value = DateTime.Now.ToLongDateString();
+                    ws.Cell("H" + i).Value = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
 
                     workbook.Save();
 
@@ -110,7 +110,7 @@ namespace Client_
                     //UserName
                     ws.Cell("G" + i).Value = txtUsername.Text;
                     //Time
-                    ws.Cell("H" + i).Value = DateTime.Now.ToLongDateString();
+                    ws.Cell("H" + i).Value = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
 
 
                 }
