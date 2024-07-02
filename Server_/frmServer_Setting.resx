@@ -117,42 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="Line.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Code.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="CF.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Quantity.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>132, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btSetup.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btSave.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAAHUAAAB1AePCB2UAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwa
-        AAACDUlEQVQ4T4WTzUsbURTFszarzkQo3WgTBSlppLhKXYhuLCYxIYnG2BrdVIgGum21GQWNwUz/kWol
-        EjeKIkppXUirXbWLCm2XLoSKoAiZ4ztvXqYVvw5ccue983vz7s0d103y+zQz3N54wPD7PCW1fKvcD/S6
-        cfGr8+FJc/0OPufAYM41IV153PbjP7lbGrTdFTNkBXz6D79X23+daTusHcCca9yjh14yNip0X6/LVkoh
-        i+bjjVGcbmUl+Ls8jD/lEZlzjXvM6SWjcCntsVf//nfdNiyXIujuaMPIizSGnw9gKN6F84+v5B499JKx
-        USVxxW98y/vZHqT7kzCmi4hG4+gVYUzPwyzM4GQzh7PtLAJez57CZLffPWq894V1Wp9y6HzaijeTMzCM
-        KViWJWNiYlIeEusOylvQS4asqyfY8IuLjJ+LQxgUb49EYhKsiTlvk0mnnJ4wyF464OBDRh4QT/Qr1Fa1
-        WpWlZAavOcD/UDP/L6FLlFCubGJ1dc2B83kD+akinonGEnRKEKzqhGziPpu4UAghlYxjqbyBRDKFaCyB
-        t0YRA30JVMyo3cQmz1eFOdI5JLX/eaEQRmcwgLSAGLzV4lxY7tFDLxkbFRLjOcYJo+Fo7aUcGpbDnjCY
-        c602J/SSUbiUM8ocElHOHuukmcGca9y7dpSV3Go85YTd8DFpynMFviJ+wnd/zi7XBa9OqFDR4drlAAAA
-        AElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        cAAAAHABznhikwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAFnSURBVDhPpdFL
+        SwJRFMBxP1vawghikKKUHguJFmWMRWFFgZIQlIlFjZBlgi10XFjNlEQPMVIx0SAdrUUYYdmq3BRJnPQO
+        M85wtQdd+C0u3PNf3KNQ60wOtdZUqQLDDAW392XRmicELcQIMmXdglS2CJblnU9VJ+lUCEcY/m3AbPOi
+        e2uX0ScE0PBfAyiiIdf/FVASo5VvAzSbAGJgGrFvBLFAjSzQPWQFtz8MbrruKJKtO89A3/B880Aj0seN
+        iIG2/lkgNhkg3IcyHaG4HBsDZe8kHmifcID2FTDETRGjtjjxgM7sAs/TO2YvU8LoV314YLC6gXyhjIkk
+        i5jxxfomxIB+zI4GUlwJ/ExMtOIKipgTDgWMc1TzAHf3AtF0AS5SPN/+JUIzCQjHH34OJLOP4AmcwjbN
+        W6JoxEYFYPf4umHgQxqouco/QzrHY8845CCcE/9AHugxLVQDb9KAlDAkxQcMoNKQ0S9yyrNCv7XKBgAA
+        AABJRU5ErkJggg==
 </value>
   </data>
+  <metadata name="fbdPath.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="ofdPath.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>113, 17</value>
+  </metadata>
 </root>

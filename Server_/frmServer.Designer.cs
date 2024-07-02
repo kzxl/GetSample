@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmServer));
             lbLine = new Label();
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
@@ -51,6 +52,7 @@
             Quantity = new DataGridViewTextBoxColumn();
             id = new DataGridViewTextBoxColumn();
             timer1 = new System.Windows.Forms.Timer(components);
+            btSetup = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -258,11 +260,22 @@
             timer1.Interval = 1000;
             timer1.Tick += timer1_Tick;
             // 
+            // btSetup
+            // 
+            btSetup.Image = (Image)resources.GetObject("btSetup.Image");
+            btSetup.Location = new Point(222, 388);
+            btSetup.Name = "btSetup";
+            btSetup.Size = new Size(33, 23);
+            btSetup.TabIndex = 6;
+            btSetup.UseVisualStyleBackColor = true;
+            btSetup.Click += btSetup_Click;
+            // 
             // frmServer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(985, 515);
+            Controls.Add(btSetup);
             Controls.Add(dgv);
             Controls.Add(btChecked);
             Controls.Add(statusStrip1);
@@ -317,5 +330,6 @@
         private DataGridViewTextBoxColumn CF;
         private DataGridViewTextBoxColumn Quantity;
         private DataGridViewTextBoxColumn id;
+        private Button btSetup;
     }
 }

@@ -1,4 +1,4 @@
-
+﻿
 
 using EasyFunctions;
 using System.Net.NetworkInformation;
@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.Data.Sqlite;
 using System.Data;
+using ClosedXML.Excel;
 
 namespace Server_
 {
@@ -22,15 +23,35 @@ namespace Server_
         SqliteConnection sqlite_conn;
         DataTable dt;
         int idLine;
+        public static XLWorkbook workbook, workbookLogs;
+        string CFPath, LogPath, Location1, Location2;
         public frmServer()
         {
             InitializeComponent();
         }
         private void frmServer_Load(object sender, EventArgs e)
         {
+            if (File.Exists("SSettings.xml"))
+            {
+                string xmlFile = "SSettings.xml";
+                DataSet dsXML = new DataSet();
+                dsXML.ReadXml(xmlFile, XmlReadMode.InferSchema);
+                CFPath = dsXML.Tables["GeneralInfo"].Rows[0]["CFPath"].ToString();
+
+                workbook = new XLWorkbook(CFPath);
+
+                LogPath = dsXML.Tables["GeneralInfo"].Rows[0]["LogPath"].ToString();
+            }
+
             sqlite_conn = clsFunctions.CreateConnection();
             refreshData();
             Clear();
+            if (!File.Exists("SSettings.xml"))
+                lbLocation.Text = "Chưa chọn file chứa CF, vui lòng chọn ở Setting";
+            else
+                lbLocation.Text = "";
+            btChecked.Enabled = false;
+
             if (clsFunctions.GetIPv4() != null)
             {
                 foreach (string temp in clsFunctions.GetIPv4())
@@ -171,13 +192,60 @@ namespace Server_
         {
             try
             {
+                btChecked.Enabled = true;
+                Clear();
                 idLine = dgv.Rows[e.RowIndex].Cells["Id"].Value._Int();
                 lbLine.Text = dgv.Rows[e.RowIndex].Cells["LINE"].Value.ToString();
                 lbCF.Text = dgv.Rows[e.RowIndex].Cells["CF"].Value.ToString();
                 lbCode.Text = dgv.Rows[e.RowIndex].Cells["CODE"].Value.ToString();
                 lbQuantity.Text = dgv.Rows[e.RowIndex].Cells["Quantity"].Value.ToString();
+                //
+                if (CheckCFLocation(lbCode.Text.Trim()).Split('/')[0] == "")
+                    Location2 = lbLocation.Text = "Vị trí mới: " + CheckCFLocation(lbCode.Text.Trim())[1];
+                else
+                    if (CheckCFLocation(lbCode.Text.Trim()).Split('/')[1] == "")
+                    Location1 = lbLocation.Text = "Vị trí cũ: " + CheckCFLocation(lbCode.Text.Trim())[0];
+                else
+                {
+                    Location1 = CheckCFLocation(lbCode.Text.Trim()).Split('/')[0];
+                    Location2 = CheckCFLocation(lbCode.Text.Trim()).Split('/')[1];
+                    lbLocation.Text = "Vị trí cũ: " + Location1 + " Vị trí mới: " + Location2;
+                }
+
+                
             }
             catch { }
+        }
+        string CheckCFLocation(string CODE)
+        {
+            try
+            {
+                string _location = "";
+                if (!string.IsNullOrEmpty(CFPath))
+                {
+                    int row = 9;
+
+                    var ws = workbook.Worksheet(1);
+                    int lastRow = ws.LastRowUsed().RowNumber();
+                    while (row < lastRow + 1)
+                    {
+                        if (CODE.Equals(ws.Cell("B" + row).Value.ToString().Trim()))
+                        {
+                            _location = ws.Cell("E" + row).Value.ToString() + "/" + ws.Cell("G" + row).Value.ToString();
+                        }
+                        row++;
+                    }
+
+
+                    return _location;
+
+                }
+                else
+                {
+                    return _location;
+                }
+            }
+            catch { return ""; }
         }
         void Clear()
         {
@@ -185,16 +253,69 @@ namespace Server_
             lbCF.Text = "";
             lbCode.Text = "";
             lbQuantity.Text = "";
+            lbLocation.Text = "";
         }
         private void btChecked_Click(object sender, EventArgs e)
         {
             try
             {
+                SaveLogs(lbLine.Text, lbCF.Text, lbCode.Text, lbQuantity.Text, Location1, Location2, DateTime.Now);
                 clsFunctions.DeleteData(sqlite_conn, idLine);
                 refreshData();
                 Clear();
             }
             catch { }
+        }
+        void SaveLogs(string Line, string CF, string Code, string Quantity, string Location1, string Location2, DateTime Confirm)
+        {
+            try
+            {
+                if (File.Exists(LogPath + @"\SLogs.xlsx"))
+                {
+                    workbookLogs = new XLWorkbook(LogPath + @"\SLogs.xlsx");
+                    var ws = workbookLogs.Worksheet(1);
+                    int lastRow = ws.LastRowUsed().RowNumber();
+                    ws.Cell("A" + (lastRow + 1)).Value = Line;
+                    ws.Cell("B" + (lastRow + 1)).Value = CF;
+                    ws.Cell("C" + (lastRow + 1)).Value = Code;
+                    ws.Cell("D" + (lastRow + 1)).Value = Quantity;
+                    ws.Cell("E" + (lastRow + 1)).Value = Location1;
+                    ws.Cell("F" + (lastRow + 1)).Value = Location2;
+                    ws.Cell("G" + (lastRow + 1)).Value = Confirm;
+                    //
+                    workbookLogs.Save();
+                }
+                else
+                {
+                    workbookLogs = new XLWorkbook();
+                    var ws = workbookLogs.AddWorksheet("Logs");
+                    //Header
+                    ws.Cell("A1").Value = "LINE";
+                    ws.Cell("B1").Value = "CF";
+                    ws.Cell("C1").Value = "CODE";
+                    ws.Cell("D1").Value = "Quantity";
+                    ws.Cell("E1").Value = "Location 1";
+                    ws.Cell("F1").Value = "Location 2";
+                    ws.Cell("G1").Value = "Confirm";
+                    //Data
+                    ws.Cell("A2").Value = Line;
+                    ws.Cell("B2").Value = CF;
+                    ws.Cell("C2").Value = Code;
+                    ws.Cell("D2").Value = Quantity;
+                    ws.Cell("E2").Value = Location1;
+                    ws.Cell("F2").Value = Location2;
+                    ws.Cell("G2").Value = Confirm;
+                    workbookLogs.SaveAs(LogPath + @"\SLogs.xlsx");
+                }
+            }
+            catch { }
+
+        }
+        private void btSetup_Click(object sender, EventArgs e)
+        {
+            frmServer_Setting f = new frmServer_Setting();
+            if (f.ShowDialog() == DialogResult.OK)
+                Clear();
         }
     }
     public class LineInfo
