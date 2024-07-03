@@ -53,6 +53,7 @@
             id = new DataGridViewTextBoxColumn();
             timer1 = new System.Windows.Forms.Timer(components);
             btSetup = new Button();
+            btRefresh = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -257,24 +258,35 @@
             // 
             // timer1
             // 
-            timer1.Interval = 1000;
+            timer1.Interval = 1500;
             timer1.Tick += timer1_Tick;
             // 
             // btSetup
             // 
             btSetup.Image = (Image)resources.GetObject("btSetup.Image");
-            btSetup.Location = new Point(222, 388);
+            btSetup.Location = new Point(265, 388);
             btSetup.Name = "btSetup";
             btSetup.Size = new Size(33, 23);
             btSetup.TabIndex = 6;
             btSetup.UseVisualStyleBackColor = true;
             btSetup.Click += btSetup_Click;
             // 
+            // btRefresh
+            // 
+            btRefresh.Image = (Image)resources.GetObject("btRefresh.Image");
+            btRefresh.Location = new Point(222, 388);
+            btRefresh.Name = "btRefresh";
+            btRefresh.Size = new Size(33, 23);
+            btRefresh.TabIndex = 6;
+            btRefresh.UseVisualStyleBackColor = true;
+            btRefresh.Click += btRefresh_Click;
+            // 
             // frmServer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(985, 515);
+            Controls.Add(btRefresh);
             Controls.Add(btSetup);
             Controls.Add(dgv);
             Controls.Add(btChecked);
@@ -331,5 +343,6 @@
         private DataGridViewTextBoxColumn Quantity;
         private DataGridViewTextBoxColumn id;
         private Button btSetup;
+        private Button btRefresh;
     }
 }

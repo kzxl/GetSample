@@ -10,6 +10,8 @@ namespace Client_
         {
             InitializeComponent();
         }
+        string LINE, IPServer, Folder;
+        SerialPort serPort;
 
         private void btSend_Click(object sender, EventArgs e)
         {
@@ -40,7 +42,10 @@ namespace Client_
                     frmClientDetail frmClientDetail = new frmClientDetail(txtCF.Text, txtCODE.Text, txtQuatity.Text, Folder);
                     this.Hide();
                     frmClientDetail.Closed += (s, args) => this.Close();
-                    serPort.Close();
+                    if (clsFunctions.checkCOMExits("COM7"))
+                    {
+                        serPort.Close();
+                    }
                     //frmClientDetail.Show();
                     frmClientDetail.ShowDialog();
 
@@ -54,8 +59,7 @@ namespace Client_
             }catch(Exception ex) { MessageBox.Show(ex.Message); }
 
         }
-        string LINE, IPServer, Folder;
-        SerialPort serPort;
+        
         private void frmClient_Load(object sender, EventArgs e)
         {
             LoadInfo();

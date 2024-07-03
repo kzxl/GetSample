@@ -25,6 +25,8 @@ namespace Server_
         int idLine;
         public static XLWorkbook workbook, workbookLogs;
         string CFPath, LogPath, Location1, Location2;
+        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"notification.wav");
+
         public frmServer()
         {
             InitializeComponent();
@@ -33,6 +35,7 @@ namespace Server_
         {
             if (File.Exists("SSettings.xml"))
             {
+
                 string xmlFile = "SSettings.xml";
                 DataSet dsXML = new DataSet();
                 dsXML.ReadXml(xmlFile, XmlReadMode.InferSchema);
@@ -146,15 +149,18 @@ namespace Server_
                         //Get user info
                         if (strdata.StartsWith("MESS"))
                         {
+
                             lbLine.Text = strdata.Split('/')[1];
                             lbCF.Text = strdata.Split('/')[2];
                             lbCode.Text = strdata.Split('/')[3];
                             lbQuantity.Text = strdata.Split('/')[4];
                             clsFunctions.InsertData(sqlite_conn, strdata.Split('/')[1], strdata.Split('/')[2], strdata.Split('/')[3], strdata.Split('/')[4]);
+                            player.Play();
+                            //refreshData();
+                            // break;
                             timer1.Enabled = true;
-                            Thread.Sleep(1000);
+                            Thread.Sleep(2000);
                             timer1.Enabled = false;
-
                         }
                         if (strdata.StartsWith("END"))
                         {
@@ -191,7 +197,10 @@ namespace Server_
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+
             refreshData();
+
+
         }
 
         private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -322,6 +331,11 @@ namespace Server_
             frmServer_Setting f = new frmServer_Setting();
             if (f.ShowDialog() == DialogResult.OK)
                 Clear();
+        }
+
+        private void btRefresh_Click(object sender, EventArgs e)
+        {
+            refreshData();
         }
     }
     public class LineInfo
