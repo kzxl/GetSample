@@ -202,6 +202,7 @@
             Name = "frmClientDetail";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frmClientDetail";
+            FormClosed += frmClientDetail_FormClosed;
             Load += frmClientDetail_Load;
             ((System.ComponentModel.ISupportInitialize)dxErr).EndInit();
             ResumeLayout(false);

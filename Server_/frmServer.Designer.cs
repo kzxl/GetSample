@@ -37,6 +37,8 @@
             groupBox3 = new GroupBox();
             lbCode = new Label();
             groupBox4 = new GroupBox();
+            ckLocation2 = new CheckBox();
+            ckLocation1 = new CheckBox();
             lbLocation = new Label();
             statusStrip1 = new StatusStrip();
             lbComputerName = new ToolStripStatusLabel();
@@ -75,20 +77,22 @@
             // 
             // groupBox1
             // 
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.Controls.Add(lbLine);
             groupBox1.Location = new Point(222, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(751, 66);
+            groupBox1.Size = new Size(648, 66);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "LINE";
             // 
             // groupBox2
             // 
+            groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox2.Controls.Add(lbCF);
             groupBox2.Location = new Point(222, 84);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(751, 70);
+            groupBox2.Size = new Size(648, 70);
             groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
             groupBox2.Text = "TÊN C/F";
@@ -104,10 +108,11 @@
             // 
             // groupBox3
             // 
+            groupBox3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox3.Controls.Add(lbCode);
             groupBox3.Location = new Point(222, 160);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(751, 70);
+            groupBox3.Size = new Size(648, 70);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
             groupBox3.Text = "CODE";
@@ -123,18 +128,44 @@
             // 
             // groupBox4
             // 
+            groupBox4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox4.Controls.Add(ckLocation2);
+            groupBox4.Controls.Add(ckLocation1);
             groupBox4.Controls.Add(lbLocation);
             groupBox4.Location = new Point(222, 312);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(751, 70);
+            groupBox4.Size = new Size(648, 70);
             groupBox4.TabIndex = 2;
             groupBox4.TabStop = false;
             groupBox4.Text = "Vị Trí";
             // 
+            // ckLocation2
+            // 
+            ckLocation2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            ckLocation2.AutoSize = true;
+            ckLocation2.Enabled = false;
+            ckLocation2.Location = new Point(409, 29);
+            ckLocation2.Name = "ckLocation2";
+            ckLocation2.Size = new Size(134, 19);
+            ckLocation2.TabIndex = 2;
+            ckLocation2.Text = "Không tìm thấy vị trí";
+            ckLocation2.UseVisualStyleBackColor = true;
+            // 
+            // ckLocation1
+            // 
+            ckLocation1.AutoSize = true;
+            ckLocation1.Enabled = false;
+            ckLocation1.Location = new Point(149, 29);
+            ckLocation1.Name = "ckLocation1";
+            ckLocation1.Size = new Size(134, 19);
+            ckLocation1.TabIndex = 2;
+            ckLocation1.Text = "Không tìm thấy vị trí";
+            ckLocation1.UseVisualStyleBackColor = true;
+            // 
             // lbLocation
             // 
             lbLocation.AutoSize = true;
-            lbLocation.Location = new Point(43, 38);
+            lbLocation.Location = new Point(43, 33);
             lbLocation.Name = "lbLocation";
             lbLocation.Size = new Size(16, 15);
             lbLocation.TabIndex = 1;
@@ -143,9 +174,9 @@
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new ToolStripItem[] { lbComputerName, lbIP, lbStatus });
-            statusStrip1.Location = new Point(0, 493);
+            statusStrip1.Location = new Point(0, 721);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(985, 22);
+            statusStrip1.Size = new Size(882, 22);
             statusStrip1.TabIndex = 3;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -169,8 +200,9 @@
             // 
             // btChecked
             // 
+            btChecked.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btChecked.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            btChecked.Location = new Point(831, 388);
+            btChecked.Location = new Point(728, 388);
             btChecked.Name = "btChecked";
             btChecked.Size = new Size(142, 54);
             btChecked.TabIndex = 4;
@@ -180,10 +212,11 @@
             // 
             // groupBox5
             // 
+            groupBox5.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox5.Controls.Add(lbQuantity);
             groupBox5.Location = new Point(222, 236);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(751, 70);
+            groupBox5.Size = new Size(648, 70);
             groupBox5.TabIndex = 2;
             groupBox5.TabStop = false;
             groupBox5.Text = "QUANTITY";
@@ -212,7 +245,7 @@
             dgv.ReadOnly = true;
             dgv.RowTemplate.Height = 25;
             dgv.ShowEditingIcon = false;
-            dgv.Size = new Size(216, 493);
+            dgv.Size = new Size(216, 721);
             dgv.TabIndex = 5;
             dgv.CellClick += dgv_CellClick;
             // 
@@ -285,7 +318,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(985, 515);
+            ClientSize = new Size(882, 743);
             Controls.Add(btRefresh);
             Controls.Add(btSetup);
             Controls.Add(dgv);
@@ -296,10 +329,11 @@
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
-            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "frmServer";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Server";
+            WindowState = FormWindowState.Maximized;
             FormClosed += frmServer_FormClosed;
             Load += frmServer_Load;
             groupBox1.ResumeLayout(false);
@@ -344,5 +378,7 @@
         private DataGridViewTextBoxColumn id;
         private Button btSetup;
         private Button btRefresh;
+        private CheckBox ckLocation2;
+        private CheckBox ckLocation1;
     }
 }

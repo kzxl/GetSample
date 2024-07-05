@@ -216,15 +216,32 @@ namespace Server_
                 lbQuantity.Text = dgv.Rows[e.RowIndex].Cells["Quantity"].Value.ToString();
                 //
                 if (CheckCFLocation(lbCode.Text.Trim()).Split('/')[0] == "")
-                    Location2 = lbLocation.Text = "Vị trí mới: " + CheckCFLocation(lbCode.Text.Trim())[1];
+                {
+                    Location2 = ckLocation2.Text = "Vị trí mới: " + CheckCFLocation(lbCode.Text.Trim())[1];
+                    ckLocation2.Checked = true;
+                    ckLocation2.Enabled = true;
+
+                    ckLocation1.Text = "Không có vị trí cũ";
+                    ckLocation1.Enabled = false;
+                }
                 else
+
                     if (CheckCFLocation(lbCode.Text.Trim()).Split('/')[1] == "")
-                    Location1 = lbLocation.Text = "Vị trí cũ: " + CheckCFLocation(lbCode.Text.Trim())[0];
+                {
+                    Location1 = ckLocation1.Text = "Vị trí cũ: " + CheckCFLocation(lbCode.Text.Trim())[0];
+                    ckLocation1.Checked = true;
+                    ckLocation1.Enabled = true;
+
+                    ckLocation2.Enabled = false;
+                    ckLocation2.Text = "Không có vị trí mới";
+                }
                 else
                 {
-                    Location1 = CheckCFLocation(lbCode.Text.Trim()).Split('/')[0];
-                    Location2 = CheckCFLocation(lbCode.Text.Trim()).Split('/')[1];
-                    lbLocation.Text = "Vị trí cũ: " + Location1 + " Vị trí mới: " + Location2;
+                    Location1 = ckLocation1.Text = "Vị trí cũ: " + CheckCFLocation(lbCode.Text.Trim()).Split('/')[0];
+                    ckLocation1.Enabled = true;
+
+                    Location2 = ckLocation2.Text = "Vị trí mới: " + CheckCFLocation(lbCode.Text.Trim()).Split('/')[1];
+                    ckLocation2.Enabled = true;
                 }
 
 
@@ -274,6 +291,15 @@ namespace Server_
         {
             try
             {
+                if (ckLocation1.CheckState != CheckState.Checked && ckLocation2.CheckState != CheckState.Checked)
+                {
+                    MessageBox.Show("Cần chọn vị trí để lưu");
+                    return;
+                }
+                if (ckLocation1.Checked == true)
+                    Location2 = "";
+                if (ckLocation2.Checked == true)
+                    Location1 = "";
                 SaveLogs(lbLine.Text, lbCF.Text, lbCode.Text, lbQuantity.Text, Location1, Location2, DateTime.Now);
                 clsFunctions.DeleteData(sqlite_conn, idLine);
                 refreshData();

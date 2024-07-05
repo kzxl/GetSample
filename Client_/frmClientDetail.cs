@@ -43,7 +43,7 @@ namespace Client_
                     workbook = new XLWorkbook(_Folder + @"\Logs.xlsx");
                     var ws = workbook.Worksheet("Sheet1");
 
-                    int i = ws.LastRowUsed().RowNumber()+1;
+                    int i = ws.LastRowUsed().RowNumber() + 1;
                     ws.Cell("A" + i).Value = txtCF.Text;
                     //CODE
                     ws.Cell("B" + i).Value = txtCODE.Text;
@@ -126,7 +126,16 @@ namespace Client_
         {
             txtCF.Text = _CF;
             txtCODE.Text = _CODE;
-            txtQuatity.Text = _Quatity; 
+            txtQuatity.Text = _Quatity;
+        }
+
+        private void frmClientDetail_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frmClient frmClient = new frmClient();
+            this.Hide();
+            frmClient.Closed += (s, args) => this.Close();
+            //frmClientDetail.Show();
+            frmClient.ShowDialog();
         }
     }
 }
