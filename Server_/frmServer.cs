@@ -241,10 +241,12 @@ namespace Server_
                 }
                 else
                 {
-                    Location1 = ckLocation1.Text = "Vị trí cũ: " + CheckCFLocation(lbCode.Text.Trim()).Split('/')[0];
+                    Location1 = CheckCFLocation(lbCode.Text.Trim()).Split('/')[0];
+                    ckLocation1.Text = "Vị trí cũ: " + CheckCFLocation(lbCode.Text.Trim()).Split('/')[0];
                     ckLocation1.Enabled = true;
 
-                    Location2 = ckLocation2.Text = "Vị trí mới: " + CheckCFLocation(lbCode.Text.Trim()).Split('/')[1];
+                    Location2 = CheckCFLocation(lbCode.Text.Trim()).Split('/')[1];
+                    ckLocation2.Text = "Vị trí mới: " + CheckCFLocation(lbCode.Text.Trim()).Split('/')[1];
                     ckLocation2.Enabled = true;
                 }
 
@@ -306,10 +308,13 @@ namespace Server_
                     MessageBox.Show("Cần chọn vị trí để lưu");
                     return;
                 }
-                if (ckLocation1.Checked == true)
+                if (ckLocation1.Checked == true && ckLocation2.Checked==false)
                     Location2 = "";
-                if (ckLocation2.Checked == true)
+                else
+                if (ckLocation2.Checked == true&& ckLocation1.Checked==false)
                     Location1 = "";
+                else
+                { }    
                 SaveLogs(lbLine.Text, lbCF.Text, lbCode.Text, lbQuantity.Text, Location1, Location2, DateTime.Now);
                 clsFunctions.DeleteData(sqlite_conn, idLine);
                 refreshData();
