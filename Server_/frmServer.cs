@@ -207,6 +207,10 @@ namespace Server_
         {
             try
             {
+                ckLocation1.Text = "Không tìm thấy vị trí";
+                ckLocation1.Enabled = false;
+                ckLocation2.Text = "Không tìm thấy vị trí";
+                ckLocation2.Enabled = false;
                 btChecked.Enabled = true;
                 Clear();
                 idLine = dgv.Rows[e.RowIndex].Cells["Id"].Value._Int();
@@ -221,7 +225,7 @@ namespace Server_
                     ckLocation2.Checked = true;
                     ckLocation2.Enabled = true;
 
-                    ckLocation1.Text = "Không có vị trí cũ";
+                    ckLocation1.Text = "Không tìm thấy vị trí cũ";
                     ckLocation1.Enabled = false;
                 }
                 else
@@ -233,7 +237,7 @@ namespace Server_
                     ckLocation1.Enabled = true;
 
                     ckLocation2.Enabled = false;
-                    ckLocation2.Text = "Không có vị trí mới";
+                    ckLocation2.Text = "Không tìm thấy vị trí mới";
                 }
                 else
                 {
@@ -281,6 +285,12 @@ namespace Server_
         }
         void Clear()
         {
+            ckLocation1.Text = "Không tìm thấy vị trí";
+            ckLocation1.Enabled = false;
+            ckLocation2.Text = "Không tìm thấy vị trí";
+            ckLocation2.Enabled = false;
+            btChecked.Enabled = true;
+
             lbLine.Text = "";
             lbCF.Text = "";
             lbCode.Text = "";

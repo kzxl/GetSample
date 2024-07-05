@@ -131,11 +131,20 @@ namespace Client_
 
         private void frmClientDetail_FormClosed(object sender, FormClosedEventArgs e)
         {
-            frmClient frmClient = new frmClient();
-            this.Hide();
-            frmClient.Closed += (s, args) => this.Close();
-            //frmClientDetail.Show();
-            frmClient.ShowDialog();
+            //frmClient frmClient = new frmClient();
+            //this.Hide();
+            //frmClient.Closed += (s, args) => this.Close();
+            ////frmClientDetail.Show();
+            //frmClient.ShowDialog();
+        }
+
+        private void frmClientDetail_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (txtUsername.Text == "")
+            {
+                dxErr.SetError(txtUsername, "Not empty");
+                e.Cancel = true;
+            }
         }
     }
 }
