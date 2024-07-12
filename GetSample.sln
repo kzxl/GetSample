@@ -9,15 +9,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp", "SampleApp\Samp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyFunctions", "EasyFunctions\EasyFunctions.csproj", "{4D285102-B418-42B7-A24A-A24EDCF431A0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01. Server_Yazaki", "Server_\01. Server_Yazaki.csproj", "{FDDE7992-A2ED-4B04-A1C2-2016714C7002}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server_", "Server_\Server_.csproj", "{FDDE7992-A2ED-4B04-A1C2-2016714C7002}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01. Client_Yazaki", "Client_\01. Client_Yazaki.csproj", "{0BD63ED6-D023-4BD4-954C-F934166C9E98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client_", "Client_\Client_.csproj", "{0BD63ED6-D023-4BD4-954C-F934166C9E98}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.AutoCopyFile_Yazaki", "..\..\Data_\WorkS\Project\AutoCopy\AutoCopy\01.AutoCopyFile_Yazaki.csproj", "{3EB526EE-0C4C-4F3E-8960-E69E366FDD13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoCopy", "..\..\Data_\WorkS\Project\AutoCopy\AutoCopy\AutoCopy.csproj", "{3EB526EE-0C4C-4F3E-8960-E69E366FDD13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01.ExportExcel_Yazaki", "..\..\Data_\WorkS\Project\ExportExcel\ExportExcel\01.ExportExcel_Yazaki.csproj", "{3536C2A8-B7FA-4F70-B0FB-08E43CF28BC0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportExcel", "..\..\Data_\WorkS\Project\ExportExcel\ExportExcel\ExportExcel.csproj", "{3536C2A8-B7FA-4F70-B0FB-08E43CF28BC0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02. NumberRecor_QA", "..\..\Data_\WorkS\Project\NumberRecor\NumberRecor\02. NumberRecor_QA.csproj", "{D38FC13D-D503-43AD-A7FE-FF156B37CDCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NumberRecor", "..\..\Data_\WorkS\Project\NumberRecor\NumberRecor\NumberRecor.csproj", "{D38FC13D-D503-43AD-A7FE-FF156B37CDCE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Yazaki", "Yazaki", "{EEBCF764-8550-459B-8229-C33696AAF65B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{11EDEB6D-6B04-46F4-81BE-089A080F3129}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +66,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3EB526EE-0C4C-4F3E-8960-E69E366FDD13} = {EEBCF764-8550-459B-8229-C33696AAF65B}
+		{3536C2A8-B7FA-4F70-B0FB-08E43CF28BC0} = {EEBCF764-8550-459B-8229-C33696AAF65B}
+		{D38FC13D-D503-43AD-A7FE-FF156B37CDCE} = {11EDEB6D-6B04-46F4-81BE-089A080F3129}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93DA69F9-22B2-4859-9F4B-F799536A1298}
